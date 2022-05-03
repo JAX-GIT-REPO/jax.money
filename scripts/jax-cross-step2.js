@@ -76,21 +76,21 @@ void async function main() {
     await jusd.deployed();
     console.log("jusd");
     await timer(3000);
-    vrp = await upgrades.deployProxy(VRP, [jaxAdmin.address], { initializer: 'initialize' });
-    await vrp.deployed();
+    // vrp = await upgrades.deployProxy(VRP, [jaxAdmin.address], { initializer: 'initialize' });
+    // await vrp.deployed();
     jinr = await JAXRE.deploy();
     
     await jinr.deployed();
     await timer(3000);
-    haber = await Haber.deploy(wjxn.address);
-    await haber.deployed();
+    // haber = await Haber.deploy(wjxn.address);
+    // await haber.deployed();
 
     console.log("setJaxAdmin");
     await timer(10000);
 
     // await wjax.setJaxAdmin(jaxAdmin.address);
     // await jusd.setJaxAdmin(jaxAdmin.address);
-    await vrp.setJaxAdmin(jaxAdmin.address);
+    // await vrp.setJaxAdmin(jaxAdmin.address);
     // await jinr.setJaxAdmin(jaxAdmin.address);
     // await wait();
 
@@ -118,7 +118,7 @@ void async function main() {
     // await wjax.setJaxSwap(owner.address);
     // await jaxAdmin.setJaxSwap(jaxSwap.address);
     
-    await jaxAdmin.setTokenAddresses(busd.address, wjxn.address, wjax.address, vrp.address, jusd.address);
+    await jaxAdmin.setTokenAddresses(busd.address, wjxn.address, wjax.address, "0x000000000000000000000000000000000000dEaD", jusd.address);
 
     console.log("setTokenAddresses");
     await timer(10000);
@@ -165,9 +165,9 @@ void async function main() {
     await ubiTaxWallet.deployed();
     await timer(10000);
     console.log("3...")
-    lpYield = await upgrades.deployProxy(LpYield, 
-        [jaxAdmin.address, pancakeRouter.address, busd.address, wjax.address], { initializer: 'initialize' })
-    await lpYield.deployed();
+    // lpYield = await upgrades.deployProxy(LpYield, 
+    //     [jaxAdmin.address, pancakeRouter.address, busd.address, wjax.address], { initializer: 'initialize' })
+    // await lpYield.deployed(); 
     // await lpYield.set_reward_token(wjax.address);
   }
 
@@ -186,7 +186,7 @@ void async function main() {
     ubi = await upgrades.deployProxy(Ubi, 
         [owner.address, wjax.address, 300], 
         { initializer: 'initialize' });
-    await ubi.deployed();
+    // await ubi.deployed();
   }
 
   console.log("BNB Balance: ", await ethers.provider.getBalance(owner.address));
@@ -196,16 +196,19 @@ void async function main() {
     await deployPancakeRouter();
   else 
     await attachPancakeRouter();
-  await deployJaxAdmin();
-  console.log("deployJaxAdmin");
-  await deployJaxPlanet();
-  console.log("deployJaxPlanet");
-  await deployTokens();
-  console.log("deployTokens");
-  await deployJaxSwap();
-  console.log("deployJaxSwap");
-  await createLiquidity();
-  console.log("createLiquidity");
+  // await deployJaxAdmin();
+  // console.log("deployJaxAdmin");
+  // await deployJaxPlanet();
+  // console.log("deployJaxPlanet");
+  // await deployTokens();
+  // console.log("deployTokens");
+  // await deployJaxSwap();
+  // console.log("deployJaxSwap");
+  // await createLiquidity();
+  // console.log("createLiquidity");
+  jaxAdmin = { address: "" };
+  wjxn = {address: ""};
+  wjax = {address: ""};
   await deployYields();
   console.log("deployYields");
   // await deployUbi();
@@ -213,20 +216,20 @@ void async function main() {
   
   
   const addresses = {
-    busd: busd.address,
-    wjxn: wjxn.address,
-    wjax: wjax.address,
-    vrp: vrp.address,
-    jusd: jusd.address,
-    jinr: jinr.address,
-    haber: haber.address,
-    jaxAdmin: jaxAdmin.address,
-    jaxSwap: jaxSwap.address,
-    jaxPlanet: jaxPlanet.address,
-    txFeeWallet: txFeeWallet.address,
-    ubiTaxWallet: ubiTaxWallet.address,
-    // ubi: ubi.address,
-    lpYield: lpYield.address
+    busd: busd?.address,
+    wjxn: wjxn?.address,
+    wjax: wjax?.address,
+    vrp: vrp?.address,
+    jusd: jusd?.address,
+    jinr: jinr?.address,
+    haber: haber?.address,
+    jaxAdmin: jaxAdmin?.address,
+    jaxSwap: jaxSwap?.address,
+    jaxPlanet: jaxPlanet?.address,
+    txFeeWallet: txFeeWallet?.address,
+    ubiTaxWallet: ubiTaxWallet?.address,
+    ubi: ubi?.address,
+    lpYield: lpYield?.address
   }
 
   console.log(addresses);
